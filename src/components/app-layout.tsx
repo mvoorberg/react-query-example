@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom';
 
 export function AppLayout() {
+  console.log('AppLayout render');
   return (
     <>
       <header>

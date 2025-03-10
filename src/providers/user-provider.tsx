@@ -12,6 +12,11 @@ interface IUserProvider {
   dispatch: React.Dispatch<UserActionInterface>;
 }
 
+/**
+ * Be aware that all components that consume the context will re-render when the context
+ * value changes. Therefore, it’s advisable to split your data into different providers
+ * according to your logic to enhance the performance.
+ */
 const UserContext = React.createContext<IUserProvider | null>(null);
 
 function userReducer(state: User, action: UserActionInterface): User {

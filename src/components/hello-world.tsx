@@ -1,3 +1,8 @@
-export function HelloWorld() {
-  return <div>HelloWorld 2</div>;
+interface HelloWorldProps {
+  name: string;
+}
+
+export function HelloWorld(props: HelloWorldProps) {
+  console.log('HelloWorld', props.name);
+  return <div>HelloWorld {props.name}</div>;
 }

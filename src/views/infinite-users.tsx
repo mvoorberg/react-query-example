@@ -2,6 +2,7 @@ import { Fragment, useContext } from 'react';
 import { useInfiniteUsers } from '@/api';
 import { User } from '@/types';
 import { UserContext } from '@/providers/user-provider';
+import { HelloWorld } from '@/components';
 
 export function InfiniteUsers() {
   const pageLimit = 10;
@@ -21,9 +22,11 @@ export function InfiniteUsers() {
   }
 
   const user = useContext(UserContext)?.user;
+  console.log('render infinite Users list!');
 
   return (
     <div>
+      <HelloWorld name="Infinite users" />
       <h2>Infinite Users</h2>
       <h3 className="mb-2">User: {user?.first_name + ' ' + user?.last_name}</h3>
 

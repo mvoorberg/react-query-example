@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { UserTable } from '@/components';
+import { HelloWorld, UserTable } from '@/components';
 import { usePaginatedUsers } from '@/api';
 import { UserContext } from '@/providers/user-provider';
 
@@ -13,6 +13,7 @@ export function PaginatedUsers() {
 
   // Manually fetch the User context
   const user = useContext(UserContext)?.user;
+  console.log('render PaginatedUsers');
 
   const prevPage = () => {
     if (page > 1) setPage(page - 1);
@@ -24,6 +25,7 @@ export function PaginatedUsers() {
 
   return (
     <div>
+      <HelloWorld name="Paginated users" />
       <h2 className="mb-4">Paginated Users</h2>
       <h3 className="mb-2">User: {user?.first_name + ' ' + user?.last_name}</h3>
       <i>Click any Name to login. Click any Id to logout.</i>

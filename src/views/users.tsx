@@ -1,4 +1,4 @@
-import { UserTable } from '@/components';
+import { HelloWorld, UserTable } from '@/components';
 import { useUsers } from '@/api';
 import { useUserContext } from '@/providers/user-provider';
 
@@ -7,9 +7,11 @@ export function Users() {
 
   // use a custom hook to get the user context
   const userCtx = useUserContext();
+  console.log('render Users list');
 
   return (
     <div>
+      <HelloWorld name="List users" />
       <h2 className="mb-4">Basic Query Example</h2>
       <h3 className="mb-2">
         User: {userCtx.user.first_name + ' ' + userCtx.user.last_name}
