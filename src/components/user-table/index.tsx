@@ -2,9 +2,10 @@ import { useDeleteUser } from '@/api';
 import { DeleteModal } from '@/components';
 import { AiOutlineDelete, AiOutlineEdit } from '@/icons';
 import { User } from '@/types';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './user-table.css';
+import { UserContext } from '@/providers/user-provider';
 
 type Props = {
   users: User[];
@@ -13,6 +14,34 @@ type Props = {
 export function UserTable({ users }: Props) {
   const [deleteId, setDeleteId] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const userCtx = useContext(UserContext);
+
+  const changeUser = (user: User) => {
+    userCtx?.dispatch({
+      type: 'login',
+      payload: {
+        id: user.id || 0,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        gender: user.gender,
+      },
+    });
+  };
+
+  const logout = () => {
+    userCtx?.dispatch({
+      type: 'logout',
+      payload: {
+        id: 0,
+        first_name: 'meh',
+        last_name: 'meh',
+        email: '',
+        gender: '',
+      },
+    });
+  };
 
   function closeModal() {
     setIsModalOpen(false);
@@ -51,8 +80,7 @@ export function UserTable({ users }: Props) {
         <thead className="text-white bg-cyan-900">
           <tr className="py-4">
             <th className="w-1/12">Id</th>
-            <th className="w-3/12">First Name</th>
-            <th className="w-3/12">Last Name</th>
+            <th className="w-3/12">Name</th>
             <th className="w-3/12">Email</th>
             <th className="w-1/12">Gender</th>
             <th className="w-1/12">Action</th>
@@ -65,9 +93,22 @@ export function UserTable({ users }: Props) {
                 className="bg-white border border-cyan-800 hover:bg-lime-100 active:text-lime-100 active:bg-lime-700"
                 key={user.id}
               >
-                <td>{user.id}</td>
-                <td>{user.first_name}</td>
-                <td>{user.last_name}</td>
+                <td
+                  onClick={() => {
+                    console.log('logout');
+                    logout();
+                  }}
+                >
+                  {user.id}
+                </td>
+                <td
+                  onClick={() => {
+                    console.log('login');
+                    changeUser(user);
+                  }}
+                >
+                  {user.first_name} {user.last_name}
+                </td>
                 <td className="hover:underline">{user.email}</td>
                 <td>{user.gender}</td>
                 <td className="inline-flex border-none">

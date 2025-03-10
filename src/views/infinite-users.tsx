@@ -1,6 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { useInfiniteUsers } from '@/api';
 import { User } from '@/types';
+import { UserContext } from '@/providers/user-provider';
 
 export function InfiniteUsers() {
   const pageLimit = 10;
@@ -19,9 +20,13 @@ export function InfiniteUsers() {
     ));
   }
 
+  const user = useContext(UserContext)?.user;
+
   return (
     <div>
       <h2>Infinite Users</h2>
+      <h3 className="mb-2">User: {user?.first_name + ' ' + user?.last_name}</h3>
+
       <div>
         {infiniteUsers.error instanceof Error && (
           <div>An error occurred: {infiniteUsers.error.message}</div>
