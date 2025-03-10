@@ -65,7 +65,7 @@ export function UserTable({ users }: Props) {
         isModalOpen={isModalOpen}
         cancelAction={closeModal}
         deleteAction={handleDelete}
-        isLoading={deleteMutation.isLoading}
+        isLoading={deleteMutation.isPending}
       />
 
       <div className="flex justify-between items-center mb-4">

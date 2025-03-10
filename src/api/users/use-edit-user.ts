@@ -16,7 +16,9 @@ export function useEditUser() {
   return useMutation({
     mutationFn: editUserFn,
     onMutate: async (updatedUser) => {
-      await queryClient.cancelQueries(userQueryKeys.detail(Number(id)));
+      await queryClient.cancelQueries({
+        queryKey: userQueryKeys.detail(Number(id)),
+      });
       const previousUser = queryClient.getQueryData(
         userQueryKeys.detail(Number(id))
       );
@@ -24,13 +26,14 @@ export function useEditUser() {
       return { previousUser: previousUser, updatedUser: updatedUser };
     },
     onError: (err, updatedUser, context?: TSFixMe) => {
+      void err, updatedUser;
       queryClient.setQueryData(
         userQueryKeys.detail(Number(id)),
         context.previousUser
       );
     },
     onSettled: () => {
-      queryClient.invalidateQueries(userQueryKeys.all);
+      queryClient.invalidateQueries({ queryKey: userQueryKeys.all });
     },
   });
 }

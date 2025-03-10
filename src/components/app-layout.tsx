@@ -5,9 +5,7 @@ export function AppLayout() {
     <>
       <header>
         <nav className="container flex justify-between p-4 mx-auto lg:w-screen-lg">
-          <Link className="w-full" to="/">
-            <img src="/src/logo.png" alt="React Query" width="200" />
-          </Link>
+          <img src="/src/logo.png" alt="React Query Example" width="200" />
           <div className="flex space-x-4">
             <div>
               <NavLink

@@ -25,6 +25,7 @@ export function useCreateUser() {
       });
     },
     onError: (err, newUser, context?: TSFixMe) => {
+      void err, newUser;
       queryClient.setQueryData(userQueryKeys.all, context.previousUsers);
     },
     onSettled: () => {

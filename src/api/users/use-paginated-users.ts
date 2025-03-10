@@ -12,11 +12,9 @@ export function usePaginatedUsers({ page, pageLimit }: Props) {
     return response.data;
   };
 
-  return useQuery(
-    userQueryKeys.pagination(page),
-    () => getPaginatedUsersFn(page),
-    {
-      keepPreviousData: true,
-    }
-  );
+  return useQuery({
+    queryKey: userQueryKeys.pagination(page),
+    queryFn: () => getPaginatedUsersFn(page),
+    //  { keepPreviousData: true, }
+  });
 }

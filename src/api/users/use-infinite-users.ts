@@ -28,6 +28,7 @@ export function useInfiniteUsers({ pageLimit }: { pageLimit: number }) {
   return useInfiniteQuery({
     queryKey: userQueryKeys.infinite(),
     queryFn: getInfiniteUsersFn,
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       // The following code block is specific to json-server api
       const nextPageUrl = parseLinkHeader(lastPage.headers.link)['next'];
@@ -38,10 +39,12 @@ export function useInfiniteUsers({ pageLimit }: { pageLimit: number }) {
         );
         const urlParams = new URLSearchParams(queryString);
         const nextPage = urlParams.get('_page');
-        return nextPage;
+        return Number(nextPage);
       } else {
         return undefined;
       }
+      // return lastPage.nextCursor;
     },
+    // getPreviousPageParam: (firstPage, allPages) => firstPage.prevCursor,
   });
 }
