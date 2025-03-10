@@ -33,6 +33,7 @@ export function InfiniteUsers() {
         )}
 
         {infiniteUsers.isFetchingNextPage && <div>Fetching Next Page...</div>}
+        {infiniteUsers.hasNextPage && <div>More to load...</div>}
 
         {infiniteUsers.isSuccess && <ul className="my-4 ml-4">{userList}</ul>}
       </div>

@@ -3,7 +3,7 @@
 import React, { forwardRef } from 'react';
 import * as ToastPrimitives from '@radix-ui/react-toast';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { X } from 'lucide-react';
+// import { X } from 'lucide-react';
 import { cn } from '@/utils';
 
 const ToastProvider = ToastPrimitives.Provider;
@@ -82,7 +82,8 @@ const ToastClose = forwardRef<
     toast-close=""
     {...props}
   >
-    <X className="h-4 w-4" />
+    {/* <X className="h-4 w-4" /> */}
+    Close
   </ToastPrimitives.Close>
 ));
 ToastClose.displayName = ToastPrimitives.Close.displayName;

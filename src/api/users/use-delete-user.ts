@@ -22,7 +22,7 @@ export function useDeleteUser({ closeModal }: Props) {
     },
     onSuccess: () => {
       toast({
-        title: 'Delete user successfully',
+        title: 'User deleted successfully',
       });
     },
     onError: () => {

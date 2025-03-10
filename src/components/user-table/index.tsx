@@ -12,7 +12,7 @@ type Props = {
 };
 
 export function UserTable({ users }: Props) {
-  const [deleteId, setDeleteId] = useState(0);
+  const [deleteUser, setDeleteUser] = useState(null as User | null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const userCtx = useContext(UserContext);
@@ -35,8 +35,8 @@ export function UserTable({ users }: Props) {
       type: 'logout',
       payload: {
         id: 0,
-        first_name: 'meh',
-        last_name: 'meh',
+        first_name: 'User is',
+        last_name: 'logged out',
         email: '',
         gender: '',
       },
@@ -47,8 +47,8 @@ export function UserTable({ users }: Props) {
     setIsModalOpen(false);
   }
 
-  function showDeleteModal(id: number) {
-    setDeleteId(id);
+  function showDeleteModal(user: User) {
+    setDeleteUser(user);
     setIsModalOpen(true);
   }
 
@@ -61,7 +61,7 @@ export function UserTable({ users }: Props) {
   return (
     <>
       <DeleteModal
-        id={deleteId}
+        user={deleteUser!}
         isModalOpen={isModalOpen}
         cancelAction={closeModal}
         deleteAction={handleDelete}
@@ -120,7 +120,7 @@ export function UserTable({ users }: Props) {
                   </Link>
                   <button
                     className="p-2 text-cyan-800 hover:text-cyan-500"
-                    onClick={() => showDeleteModal(user.id!)}
+                    onClick={() => showDeleteModal(user)}
                   >
                     <AiOutlineDelete />
                   </button>
